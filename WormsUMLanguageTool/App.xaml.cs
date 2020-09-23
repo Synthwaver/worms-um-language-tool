@@ -1,0 +1,11 @@
+﻿using System.Windows;
+
+namespace WormsUMLanguageTool
+{
+    public partial class App : Application
+    {
+        public const WormsLanguage DefaultChosenLanguage = WormsLanguage.English;
+        public const string ExeFileName = "WormsMayhem.exe";
+        public const int LanguageBlockOffset = 0x44FC30;
+    }
+}
