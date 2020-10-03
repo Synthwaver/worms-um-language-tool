@@ -11,14 +11,14 @@ namespace WormsUMLanguageTool
         {
             InitializeComponent();
 
-            comboBoxLanguage.ItemsSource = Enum.GetValues(typeof(WormsLanguage));
-            comboBoxLanguage.SelectedItem = App.DefaultChosenLanguage;
+            ComboBoxLanguage.ItemsSource = Enum.GetValues(typeof(WormsLanguage));
+            ComboBoxLanguage.SelectedItem = App.DefaultChosenLanguage;
 
             string wormsPath = TryFindWormsPath();
 
             if (wormsPath != null)
             {
-                textBoxPath.Text = wormsPath;
+                TextBoxPath.Text = wormsPath;
             }
         }
 
@@ -36,7 +36,7 @@ namespace WormsUMLanguageTool
 
         private void WriteLanguageBlock(byte[] langBlockBytes)
         {
-            using (FileStream stream = File.OpenWrite(textBoxPath.Text))
+            using (FileStream stream = File.OpenWrite(TextBoxPath.Text))
             {
                 stream.Seek(App.LanguageBlockOffset, SeekOrigin.Begin);
                 using (var writer = new BinaryWriter(stream))
@@ -78,23 +78,23 @@ namespace WormsUMLanguageTool
         {
             var dialog = new OpenFileDialog { Filter = "EXE-files|*.exe|All files|*.*" };
 
-            if (File.Exists(textBoxPath.Text))
+            if (File.Exists(TextBoxPath.Text))
             {
-                dialog.InitialDirectory = Path.GetDirectoryName(textBoxPath.Text) ?? Directory.GetCurrentDirectory();
+                dialog.InitialDirectory = Path.GetDirectoryName(TextBoxPath.Text) ?? Directory.GetCurrentDirectory();
             }
 
             if (dialog.ShowDialog() == true)
             {
-                textBoxPath.Text = dialog.FileName;
+                TextBoxPath.Text = dialog.FileName;
             }
         }
 
-        private void buttonModify_Click(object sender, RoutedEventArgs e)
+        private void ButtonModify_Click(object sender, RoutedEventArgs e)
         {
             byte[] langBlockBytes;
             try
             {
-                langBlockBytes = ReadLanguageBlock(textBoxPath.Text);
+                langBlockBytes = ReadLanguageBlock(TextBoxPath.Text);
             }
             catch
             {
@@ -113,7 +113,7 @@ namespace WormsUMLanguageTool
                 return;
             }
 
-            langBlock.SetLanguage((WormsLanguage)comboBoxLanguage.SelectedItem);
+            langBlock.SetLanguage((WormsLanguage)ComboBoxLanguage.SelectedItem);
 
             try
             {
@@ -128,9 +128,9 @@ namespace WormsUMLanguageTool
             MessageBox.Show("Success!");
         }
 
-        private void textBoxPath_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void TextBoxPath_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            textBoxPath.ToolTip = textBoxPath.Text;
+            TextBoxPath.ToolTip = TextBoxPath.Text;
         }
     }
 }

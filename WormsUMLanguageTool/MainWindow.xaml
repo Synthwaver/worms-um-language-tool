@@ -10,14 +10,14 @@
         <StackPanel>
             <Grid>
                 <Label Content="Path to WormsMayhem.exe" VerticalAlignment="Top" Height="30" VerticalContentAlignment="Center" FontSize="14" Padding="0"/>
-                <TextBox x:Name="textBoxPath" Height="30" VerticalAlignment="Top" ToolTip="Path to WormsMayhem.exe" VerticalContentAlignment="Center" IsTabStop="False" FontStyle="Italic" IsReadOnly="True" Padding="5,0" TextChanged="textBoxPath_TextChanged" Margin="0,30,110,0"/>
-                <Button x:Name="buttonBrowse" Content="Browse..." VerticalAlignment="Top" Height="30" Click="Button_Click" FontSize="14" HorizontalAlignment="Right" Width="105" Margin="0,30,0,0"/>
+                <TextBox x:Name="TextBoxPath" Height="30" VerticalAlignment="Top" ToolTip="Path to WormsMayhem.exe" VerticalContentAlignment="Center" IsTabStop="False" FontStyle="Italic" IsReadOnly="True" Padding="5,0" TextChanged="TextBoxPath_TextChanged" Margin="0,30,110,0"/>
+                <Button x:Name="ButtonBrowse" Content="Browse..." VerticalAlignment="Top" Height="30" Click="Button_Click" FontSize="14" HorizontalAlignment="Right" Width="105" Margin="0,30,0,0"/>
             </Grid>
             <Grid Margin="0,10">
                 <Label Content="Desired language" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="116" VerticalContentAlignment="Center" FontSize="14" Padding="0"/>
-                <ComboBox x:Name="comboBoxLanguage" HorizontalAlignment="Left" VerticalAlignment="Top" Width="161" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" Margin="121,0,0,0"/>
+                <ComboBox x:Name="ComboBoxLanguage" HorizontalAlignment="Left" VerticalAlignment="Top" Width="161" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" Margin="121,0,0,0"/>
             </Grid>
-            <Button x:Name="buttonModify" Content="Modify" VerticalAlignment="Top" Height="50" Click="buttonModify_Click" FontSize="14"/>
+            <Button x:Name="ButtonModify" Content="Modify" VerticalAlignment="Top" Height="50" Click="ButtonModify_Click" FontSize="14"/>
         </StackPanel>
     </Grid>
 </Window>
