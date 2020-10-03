@@ -13,6 +13,13 @@ namespace WormsUMLanguageTool
 
             comboBoxLanguage.ItemsSource = Enum.GetValues(typeof(WormsLanguage));
             comboBoxLanguage.SelectedItem = App.DefaultChosenLanguage;
+
+            string wormsPath = TryFindWormsPath();
+
+            if (wormsPath != null)
+            {
+                textBoxPath.Text = wormsPath;
+            }
         }
 
         private byte[] ReadLanguageBlock(string filePath)
@@ -39,9 +46,42 @@ namespace WormsUMLanguageTool
             }
         }
 
+        private string TryFindWormsPath()
+        {
+            string path = TryFindWormsSteamPath();
+
+            if (path != null)
+            {
+                return path;
+            }
+
+            return File.Exists(App.WormsExeFileName) ? Path.GetFullPath(App.WormsExeFileName) : null;
+        }
+
+        private string TryFindWormsSteamPath()
+        {
+            const string regValName = "InstallPath";
+            string steamPath = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam", regValName, null) as string ??
+                               Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Valve\Steam", regValName, null) as string;
+
+            if (string.IsNullOrEmpty(steamPath))
+            {
+                return null;
+            }
+
+            string wormsPath = Path.Combine(steamPath, App.WormsSteamDirRelativePath, App.WormsExeFileName);
+
+            return File.Exists(wormsPath) ? wormsPath : null;
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog { Filter = "EXE-files|*.exe|All files|*.*" };
+
+            if (File.Exists(textBoxPath.Text))
+            {
+                dialog.InitialDirectory = Path.GetDirectoryName(textBoxPath.Text) ?? Directory.GetCurrentDirectory();
+            }
 
             if (dialog.ShowDialog() == true)
             {
