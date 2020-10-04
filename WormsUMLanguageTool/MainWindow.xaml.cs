@@ -107,7 +107,7 @@ namespace WormsUMLanguageTool
             }
             catch
             {
-                MessageBox.Show("File read error");
+                MessageBox.Show("File read error", string.Empty, MessageBoxButton.OK,MessageBoxImage.Error);
                 return;
             }
 
@@ -118,7 +118,7 @@ namespace WormsUMLanguageTool
             }
             catch
             {
-                MessageBox.Show("The file is invalid");
+                MessageBox.Show("The file is invalid", string.Empty, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -132,7 +132,7 @@ namespace WormsUMLanguageTool
                 }
                 catch
                 {
-                    MessageBox.Show("Unable to make backup");
+                    MessageBox.Show("Unable to make backup", string.Empty, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }
@@ -143,7 +143,7 @@ namespace WormsUMLanguageTool
             }
             catch
             {
-                MessageBox.Show("File write error");
+                MessageBox.Show("File write error", string.Empty, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
