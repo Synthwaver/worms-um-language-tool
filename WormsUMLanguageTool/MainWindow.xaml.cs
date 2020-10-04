@@ -74,6 +74,15 @@ namespace WormsUMLanguageTool
             return File.Exists(wormsPath) ? wormsPath : null;
         }
 
+        private void MakeBackup(string filePath)
+        {
+            string backupFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}_{Path.GetFileName(filePath)}";
+            string backupDirPath = Path.Combine(Path.GetDirectoryName(filePath) ?? string.Empty, App.BackupDirName);
+
+            Directory.CreateDirectory(backupDirPath);
+            File.Copy(filePath, Path.Combine(backupDirPath, backupFileName), true);
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog { Filter = "EXE-files|*.exe|All files|*.*" };
@@ -114,6 +123,19 @@ namespace WormsUMLanguageTool
             }
 
             langBlock.SetLanguage((WormsLanguage)ComboBoxLanguage.SelectedItem);
+
+            if (MakeBackupCheckbox.IsChecked == true)
+            {
+                try
+                {
+                    MakeBackup(TextBoxPath.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("Unable to make backup");
+                    return;
+                }
+            }
 
             try
             {

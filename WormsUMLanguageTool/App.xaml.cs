@@ -7,6 +7,7 @@ namespace WormsUMLanguageTool
         public const WormsLanguage DefaultChosenLanguage = WormsLanguage.English;
         public const string WormsExeFileName = "WormsMayhem.exe";
         public const string WormsSteamDirRelativePath = @"steamapps\common\WormsXHD";
+        public const string BackupDirName = "LanguageToolBackups";
         public const int LanguageBlockOffset = 0x44FC30;
     }
 }
