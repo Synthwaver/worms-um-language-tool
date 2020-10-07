@@ -1,4 +1,3 @@
-WormsUMLanguageTool/bin/
-WormsUMLanguageTool/obj/
+bin/
+obj/
 .vs/
-WormsUMLanguageTool.sln.DotSettings.user
