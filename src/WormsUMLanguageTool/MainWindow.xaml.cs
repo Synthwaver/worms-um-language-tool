@@ -60,18 +60,29 @@ namespace WormsUMLanguageTool
 
         private string TryFindWormsSteamPath()
         {
-            const string regValName = "InstallPath";
-            string steamPath = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam", regValName, null) as string ??
-                               Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Valve\Steam", regValName, null) as string;
+            string wormsInstallLocation = Registry.GetValue(
+                @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 70600", "InstallLocation", null) as string;
 
-            if (string.IsNullOrEmpty(steamPath))
+            if (!string.IsNullOrWhiteSpace(wormsInstallLocation))
             {
-                return null;
+                string wormsPath = Path.Combine(wormsInstallLocation, App.WormsExeFileName);
+
+                if (File.Exists(wormsPath))
+                    return wormsPath;
             }
 
-            string wormsPath = Path.Combine(steamPath, App.WormsSteamDirRelativePath, App.WormsExeFileName);
+            string steamPath = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam", "InstallPath", null) as string ??
+                               Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Valve\Steam", "InstallPath", null) as string;
 
-            return File.Exists(wormsPath) ? wormsPath : null;
+            if (!string.IsNullOrWhiteSpace(steamPath))
+            {
+                string wormsPath = Path.Combine(steamPath, App.WormsSteamDirRelativePath, App.WormsExeFileName);
+
+                if (File.Exists(wormsPath))
+                    return wormsPath;
+            }
+
+            return null;
         }
 
         private void MakeBackup(string filePath)
