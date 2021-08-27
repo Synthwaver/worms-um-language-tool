@@ -24,8 +24,7 @@ namespace WormsUMLanguageTool
 
         public const int BlockLength = 475;
 
-        private readonly LanguageInsertionPositions desiredLangPos = new LanguageInsertionPositions(loading:  72, ls: 204, fe: 308, name: 412);
-        private readonly LanguageInsertionPositions defaultLangPos = new LanguageInsertionPositions(loading: 144, ls: 252, fe: 356, name: 468);
+        private readonly LanguageInsertionPositions langPos = new LanguageInsertionPositions(loading: 144, ls: 252, fe: 356, name: 468);
 
         private byte[] bytes;
         public byte[] GetBytes()
@@ -35,8 +34,6 @@ namespace WormsUMLanguageTool
 
         public string AsciiString => Encoding.ASCII.GetString(bytes);
         public string DisplayableString => AsciiString.Replace('\0', ' ');
-
-        private readonly WormsLanguage defaultLanguage = WormsLanguage.English;
 
         public LanguageBlock(byte[] bytes)
         {
@@ -57,9 +54,9 @@ namespace WormsUMLanguageTool
 
             string text = Encoding.ASCII.GetString(bytes);
             string pattern = "^"
-                    + $@"(?=.{{{defaultLangPos.Loading + 3}}}Loading)"
-                    + $@"(?=.{{{defaultLangPos.LS + 3}}}LS)"
-                    + $@"(?=.{{{defaultLangPos.FE + 3}}}FE)";
+                    + $@"(?=.{{{langPos.Loading + 3}}}Loading)"
+                    + $@"(?=.{{{langPos.LS + 3}}}LS)"
+                    + $@"(?=.{{{langPos.FE + 3}}}FE)";
 
             if (!new Regex(pattern).IsMatch(text))
             {
@@ -70,11 +67,7 @@ namespace WormsUMLanguageTool
         public void SetLanguage(WormsLanguage language)
         {
             string newAsciiString = new string('\0', BlockLength);
-            newAsciiString = InsertLangWithPos(newAsciiString, defaultLanguage, defaultLangPos);
-            if (language != defaultLanguage)
-            {
-                newAsciiString = InsertLangWithPos(newAsciiString, language, desiredLangPos);
-            }
+            newAsciiString = InsertLangWithPos(newAsciiString, language, langPos);
             bytes = Encoding.ASCII.GetBytes(newAsciiString);
 
             string InsertLangWithPos(string str, WormsLanguage lang, LanguageInsertionPositions pos)

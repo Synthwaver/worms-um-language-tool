@@ -7,7 +7,6 @@
         French,
         German,
         Italian,
-        Japanese,
         Polish,
         Russian,
         Spanish
