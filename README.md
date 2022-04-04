@@ -3,6 +3,9 @@
     Worms Ultimate Mayhem Language Tool
 </h1>
 
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/Synthwaver/worms-um-language-tool?label=latest)](https://github.com/Synthwaver/worms-um-language-tool/releases/latest)
+[![GitHub all releases](https://img.shields.io/github/downloads/Synthwaver/worms-um-language-tool/total)](https://github.com/Synthwaver/worms-um-language-tool/releases)
+
 This tool allows you to modify the Steam version of Worms Ultimate Mayhem to unlock inaccessible languages, the files of which are in the game directory.
 
 ## Supported languages
